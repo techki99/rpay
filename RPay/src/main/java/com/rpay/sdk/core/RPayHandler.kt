@@ -4,13 +4,12 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import com.rpay.sdk.listener.RPayListener
 import com.rpay.sdk.utils.Session
-import com.rpay.sdk.view.activity.HomeScreen
+import com.rpay.sdk.view.activity.RPayHomeScreen
 import java.lang.Exception
 
 @SuppressLint("StaticFieldLeak")
@@ -134,7 +133,7 @@ object RPayHandler {
                 RPayLog.message("Currency should not be empty")
             }
             else -> {
-                val intent = Intent(context, HomeScreen::class.java)
+                val intent = Intent(context, RPayHomeScreen::class.java)
                 session.setCurrencyCode(currencyCode)
                 session.setTotalAmount(amount)
                 context.startActivity(intent)

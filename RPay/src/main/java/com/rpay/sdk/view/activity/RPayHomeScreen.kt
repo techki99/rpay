@@ -1,24 +1,19 @@
 package com.rpay.sdk.view.activity
 
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import com.rpay.sdk.R
 import com.rpay.sdk.core.RPay
-import com.rpay.sdk.core.RPayHandler
-import com.rpay.sdk.databinding.HomeScreenBinding
 
-class HomeScreen : AppCompatActivity() {
+class RPayHomeScreen : AppCompatActivity() {
 
     private lateinit var closeDialog: AlertDialog.Builder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.home_screen)
+        setContentView(R.layout.rpay_home_screen)
 
         initialize()
     }

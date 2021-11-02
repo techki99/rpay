@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.HomeScreen">
+    tools:context=".view.activity.RPayHomeScreen">
 
     <androidx.fragment.app.FragmentContainerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        app:navGraph="@navigation/navigation"/>
+        app:navGraph="@navigation/rpay_navigation"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
