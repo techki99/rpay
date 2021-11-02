@@ -11,7 +11,7 @@ import com.rpay.sdk.utils.NetworkResponse
 import com.rpay.sdk.utils.SingleLiveEvent
 import kotlinx.coroutines.launch
 
-class LoginViewModel: ViewModel() {
+internal class LoginViewModel: ViewModel() {
 
     private val loginDetails: SingleLiveEvent<NetworkResponse<LoginResponse>> = SingleLiveEvent()
     private val countryList: SingleLiveEvent<NetworkResponse<CountryListResponse>> = SingleLiveEvent()

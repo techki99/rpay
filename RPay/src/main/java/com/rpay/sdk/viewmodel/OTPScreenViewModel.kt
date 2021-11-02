@@ -10,7 +10,7 @@ import com.rpay.sdk.utils.NetworkResponse
 import com.rpay.sdk.utils.SingleLiveEvent
 import kotlinx.coroutines.launch
 
-class OTPScreenViewModel: ViewModel() {
+internal class OTPScreenViewModel: ViewModel() {
 
     private val otpStatus: SingleLiveEvent<NetworkResponse<OTPResponse>> = SingleLiveEvent()
 

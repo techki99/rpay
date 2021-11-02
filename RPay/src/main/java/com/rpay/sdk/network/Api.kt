@@ -4,7 +4,7 @@ import com.rpay.sdk.model.*
 import retrofit2.Response
 import retrofit2.http.*
 
-interface Api {
+internal interface Api {
 
     @GET("country/list")
     suspend fun countryList(): Response<CountryListResponse>

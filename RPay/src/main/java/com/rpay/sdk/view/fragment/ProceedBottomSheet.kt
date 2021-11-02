@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.rpay.sdk.databinding.ProceedBottomSheetBinding
 
-class ProceedBottomSheet: BottomSheetDialogFragment() {
+internal class ProceedBottomSheet: BottomSheetDialogFragment() {
 
     private lateinit var binding: ProceedBottomSheetBinding
 

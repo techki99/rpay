@@ -2,6 +2,7 @@ package com.rpay.sdk.core
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.graphics.drawable.Drawable
 import com.rpay.sdk.listener.RPayListener
 
@@ -33,7 +34,9 @@ object RPay {
      */
     fun settings(logVisible: Boolean, appName: String? = null) {
         RPayLog.setLogVisible(logVisible)
-        RPayHandler.setAppName(appName!!)
+        if (appName != null) {
+            rPayHandler!!.setAppName(appName)
+        }
     }
 
     /**
@@ -50,7 +53,7 @@ object RPay {
     /**
      * SetUp payment
      */
-    fun makePayment(amount: String, currencyCode: String) {
+    fun makePayment(amount: Double, currencyCode: String) {
         if (rPayHandler == null){
             RPayLog.message("Sdk not initialized")
         }else {
@@ -61,8 +64,57 @@ object RPay {
     /**
      * Get payment status listener
      */
-    fun getListener(): RPayListener {
+    internal fun getListener(): RPayListener {
         return rPayHandler?.getPaymentListener()!!
+    }
+
+    /**
+     * Get merchant key
+     */
+    internal fun getMerchantKey(): String {
+        return rPayHandler?.getMerchantKey().toString()
+    }
+
+    /**
+     * Store Auth Token
+     */
+    internal fun storeAuthToken(key: String) {
+        rPayHandler?.storeAuthToken(key)
+    }
+
+    /**
+     * Get Auth Token
+     */
+    internal fun getAuthToken(): String {
+        return rPayHandler?.getAuthToken().toString()
+    }
+
+    /**
+     * Get Total Amount
+     */
+    internal fun getTotalAmount(): String {
+        return rPayHandler?.getTotalAmount().toString()
+    }
+
+    /**
+     * Get Currency Code
+     */
+    internal fun getCurrencyCode(): String {
+        return rPayHandler?.getCurrencyCode().toString()
+    }
+
+    /**
+     * Get Network Status
+     */
+    internal fun isNetConnected(context: Context): Boolean? {
+        return rPayHandler?.isConnected(context)
+    }
+
+    /**
+     * Get App Name
+     */
+    internal fun getAppName(): String? {
+        return rPayHandler?.getAppName()
     }
 
 }

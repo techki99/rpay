@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.rpay.sdk.base.BaseFragment
+import com.rpay.sdk.core.RPay
 import com.rpay.sdk.core.RPayHandler
 import com.rpay.sdk.databinding.RpayPaymentScreenBinding
 import com.rpay.sdk.utils.NetworkResponse
@@ -14,7 +15,7 @@ import java.util.*
 import kotlin.collections.HashMap
 
 
-class PaymentScreen : BaseFragment() {
+internal class PaymentScreen : BaseFragment() {
 
     private lateinit var binding: RpayPaymentScreenBinding
     private lateinit var viewModel: PaymentScreenViewModel
@@ -39,11 +40,11 @@ class PaymentScreen : BaseFragment() {
 
     private fun setUpObserver() {
         val headers: HashMap<String, String> = HashMap()
-        headers["secret_key"] = RPayHandler.getMerchantKey()
-        headers["auth_token"] = RPayHandler.getAuthToken()
+        headers["secret_key"] = RPay.getMerchantKey()
+        headers["auth_token"] = RPay.getAuthToken()
         val params: HashMap<String, String> = HashMap()
-        params["amount"] = RPayHandler.getTotalAmount()
-        params["currency"] = RPayHandler.getCurrencyCode()
+        params["amount"] = RPay.getTotalAmount()
+        params["currency"] = RPay.getCurrencyCode()
         viewModel.getPaymentDetails(headers, params).observe(viewLifecycleOwner, {
             when (it) {
                 is NetworkResponse.Loading -> {
@@ -51,7 +52,7 @@ class PaymentScreen : BaseFragment() {
                 }
                 is NetworkResponse.Success -> {
                     hideProgressDialog()
-                    binding.amountTextView.text = RPayHandler.getCurrencyCode() + " " + String.format(Locale.ENGLISH, "%.2f", RPayHandler.getTotalAmount().toDouble())
+                    binding.amountTextView.text = RPay.getCurrencyCode() + " " + String.format(Locale.ENGLISH, "%.2f", RPay.getTotalAmount().toDouble())
                     binding.walletBalanceTextView.text = it.data?.data?.api_user_currency + " " + it.data?.data?.api_user_balance?.let { it1 -> String.format(Locale.ENGLISH, "%.2f", it1.toDouble()) }
                     binding.orderAmountTextView.text = it.data?.data?.deductable_currency + " " + it.data?.data?.deduct_amount
                     if (it.data?.data?.site_fee?.toDouble() != 0.0) {
@@ -78,7 +79,7 @@ class PaymentScreen : BaseFragment() {
     private fun setUpUi() {
         binding.apply {
 
-            merchantNameTextView.text = RPayHandler.getAppName()
+            merchantNameTextView.text = RPay.getAppName()
 
             walletLayout.setOnClickListener {
                 walletLayout.alpha = 1f
@@ -95,18 +96,18 @@ class PaymentScreen : BaseFragment() {
             }
 
             walletPayButton.setOnClickListener {
-                if (context?.let { RPayHandler.isNetConnected(it) } == false){
+                if (context?.let { RPay.isNetConnected(it) } == false){
                     showNoInternetDialog()
                 }else {
                     val headers: HashMap<String, String> = HashMap()
-                    headers["secret_key"] = RPayHandler.getMerchantKey()
-                    headers["auth_token"] = RPayHandler.getAuthToken()
+                    headers["secret_key"] = RPay.getMerchantKey()
+                    headers["auth_token"] = RPay.getAuthToken()
                     val params: HashMap<String, String> = HashMap()
-                    params["amount"] = RPayHandler.getTotalAmount()
-                    params["currency"] = RPayHandler.getCurrencyCode()
+                    params["amount"] = RPay.getTotalAmount()
+                    params["currency"] = RPay.getCurrencyCode()
                     params["description"] = ""
                     viewModel.capturePayment(headers, params).observe(viewLifecycleOwner, {
-                        val listener = RPayHandler.getPaymentListener()
+                        val listener = RPay.getListener()
                         when (it) {
                             is NetworkResponse.Loading -> {
                                 showProgressDialog()

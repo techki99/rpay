@@ -9,7 +9,7 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 
 
-object Session {
+internal object Session {
 
     private lateinit var details: SharedPreferences
     private lateinit var detailsEditor: SharedPreferences.Editor

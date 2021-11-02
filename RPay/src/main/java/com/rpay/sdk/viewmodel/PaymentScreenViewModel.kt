@@ -11,7 +11,7 @@ import com.rpay.sdk.utils.NetworkResponse
 import com.rpay.sdk.utils.SingleLiveEvent
 import kotlinx.coroutines.launch
 
-class PaymentScreenViewModel: ViewModel() {
+internal class PaymentScreenViewModel: ViewModel() {
 
     private val paymentDetails: SingleLiveEvent<NetworkResponse<PaymentDetailResponse>> = SingleLiveEvent()
     private val capturePayment: SingleLiveEvent<NetworkResponse<CaptureResponse>> = SingleLiveEvent()

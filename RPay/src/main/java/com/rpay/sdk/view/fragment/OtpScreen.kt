@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.rpay.sdk.R
 import com.rpay.sdk.base.BaseFragment
+import com.rpay.sdk.core.RPay
 import com.rpay.sdk.core.RPayHandler
 import com.rpay.sdk.databinding.RpayOtpScreenBinding
 import com.rpay.sdk.utils.NetworkResponse
@@ -24,7 +25,7 @@ import com.rpay.sdk.utils.Pinview
 import com.rpay.sdk.viewmodel.OTPScreenViewModel
 
 
-class OtpScreen : BaseFragment() {
+internal class OtpScreen : BaseFragment() {
 
     private lateinit var binding: RpayOtpScreenBinding
     private lateinit var viewModel: OTPScreenViewModel
@@ -62,12 +63,12 @@ class OtpScreen : BaseFragment() {
                 override fun onDataEntered(pin: Pinview?, fromUser: Boolean) {
                     if (pin != null) {
                         if (otp.equals(pin.value, true)){
-                            if (context?.let { RPayHandler.isNetConnected(it) } == false){
+                            if (context?.let { RPay.isNetConnected(it) } == false){
                                 showNoInternetDialog()
                             }else {
                                 val headers: HashMap<String, String> = HashMap()
-                                headers["secret_key"] = RPayHandler.getMerchantKey()
-                                headers["auth_token"] = RPayHandler.getAuthToken()
+                                headers["secret_key"] = RPay.getMerchantKey()
+                                headers["auth_token"] = RPay.getAuthToken()
                                 val params: HashMap<String, String> = HashMap()
                                 params["otp"] = pin.value
                                 pinView.clearValue()

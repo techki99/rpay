@@ -2,7 +2,7 @@ package com.rpay.sdk.core
 
 import android.util.Log
 
-class RPayLog {
+internal class RPayLog {
 
     companion object {
 

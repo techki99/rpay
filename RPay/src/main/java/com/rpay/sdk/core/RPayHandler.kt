@@ -11,30 +11,36 @@ import com.rpay.sdk.listener.RPayListener
 import com.rpay.sdk.utils.Session
 import com.rpay.sdk.view.activity.RPayHomeScreen
 import java.lang.Exception
+import java.util.*
 
 @SuppressLint("StaticFieldLeak")
-object RPayHandler {
-
+internal class RPayHandler(
     /**
      * View context
      */
-    private lateinit var context: Activity
+    private var context: Activity
+) {
 
     /**
-     * RPay Handler - Handler for all payment related works
+     * session to store values
      */
-    private var rPayHandler: RPayHandler? = null
+    private var session: Session = Session.getInstance(context)
 
-    /**
-     * Initialize Handler
-     */
-    fun getInstance(context: Activity): RPayHandler {
-        if (rPayHandler == null) {
-            rPayHandler = RPayHandler
+    companion object {
+        /**
+         * RPay Handler - Handler for all payment related works
+         */
+        private var rPayHandler: RPayHandler? = null
+
+        /**
+         * Initialize Handler
+         */
+        fun getInstance(context: Activity): RPayHandler {
+            if (rPayHandler == null) {
+                rPayHandler = RPayHandler(context)
+            }
+            return rPayHandler as RPayHandler
         }
-        this.context = context
-        this.session = Session.getInstance(context)
-        return rPayHandler as RPayHandler
     }
 
     /**
@@ -42,11 +48,6 @@ object RPayHandler {
      */
     private lateinit var rPayListener: RPayListener
 
-
-    /**
-     * session to store values
-     */
-    private lateinit var session: Session
 
     /**
      * Store merchant key
@@ -121,12 +122,12 @@ object RPayHandler {
     /**
      * SetUp Payment screen
      */
-    fun makePayment(amount: String, currencyCode: String) {
+    fun makePayment(amount: Double, currencyCode: String) {
         when {
-            amount.isEmpty() -> {
+            amount.toString().isEmpty() -> {
                 RPayLog.message("Price should not be empty")
             }
-            amount.toInt() == 0 -> {
+            amount == 0.0 -> {
                 RPayLog.message("Price should not be 0")
             }
             currencyCode.isEmpty() -> {
@@ -135,7 +136,7 @@ object RPayHandler {
             else -> {
                 val intent = Intent(context, RPayHomeScreen::class.java)
                 session.setCurrencyCode(currencyCode)
-                session.setTotalAmount(amount)
+                session.setTotalAmount(String.format(Locale.ENGLISH, "%.2f", amount))
                 context.startActivity(intent)
             }
         }
@@ -144,7 +145,7 @@ object RPayHandler {
     /**
      * Check Network Connection
      */
-    fun isNetConnected(context: Context): Boolean {
+    fun isConnected(context: Context): Boolean {
         try {
             val conMgr = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {

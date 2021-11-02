@@ -2,7 +2,7 @@ package com.rpay.sdk.model
 
 import com.google.gson.annotations.SerializedName
 
-data class CaptureResponse(
+internal data class CaptureResponse(
     @SerializedName("message")
     val message: String,
     @SerializedName("data")

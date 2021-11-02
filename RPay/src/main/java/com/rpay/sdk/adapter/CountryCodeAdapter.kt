@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.rpay.sdk.databinding.RpayCountryListItemBinding
 import com.rpay.sdk.model.CountryListResponse
 
-class CountryCodeAdapter(val context: Context, private val countryList: ArrayList<CountryListResponse.CountryList>): BaseAdapter() {
+internal class CountryCodeAdapter(val context: Context, private val countryList: ArrayList<CountryListResponse.CountryList>): BaseAdapter() {
 
     override fun getCount(): Int {
         return countryList.size

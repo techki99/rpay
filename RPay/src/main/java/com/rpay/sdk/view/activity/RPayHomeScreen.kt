@@ -7,7 +7,7 @@ import android.os.Bundle
 import com.rpay.sdk.R
 import com.rpay.sdk.core.RPay
 
-class RPayHomeScreen : AppCompatActivity() {
+internal class RPayHomeScreen : AppCompatActivity() {
 
     private lateinit var closeDialog: AlertDialog.Builder
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.demo.rpaysdk.databinding.ActivityCheckoutScreenBinding
 import com.rpay.sdk.core.RPay
+import com.rpay.sdk.databinding.RpayPaymentScreenBinding
 import com.rpay.sdk.listener.RPayListener
 
 class CheckOutScreenActivity : AppCompatActivity(), RPayListener {
@@ -36,9 +37,9 @@ class CheckOutScreenActivity : AppCompatActivity(), RPayListener {
                     }
                     else -> {
                         RPay.init(this@CheckOutScreenActivity, merchantKey)
-                        RPay.settings(logVisible = true, appName = "ComeNEat")
+                        RPay.settings(logVisible = true)
                         RPay.setPaymentListener(this@CheckOutScreenActivity)
-                        RPay.makePayment(amount = amount, currencyCode = currency)
+                        RPay.makePayment(amount = amount.toDouble(), currencyCode = currency)
                     }
                 }
             }

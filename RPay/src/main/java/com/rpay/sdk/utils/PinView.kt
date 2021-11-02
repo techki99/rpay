@@ -20,7 +20,7 @@ import androidx.core.content.ContextCompat
 import com.rpay.sdk.R
 import kotlin.math.max
 
-class Pinview @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr),
+internal class Pinview @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr),
     TextWatcher, View.OnFocusChangeListener, View.OnKeyListener {
     private val DENSITY = getContext().resources.displayMetrics.density
 

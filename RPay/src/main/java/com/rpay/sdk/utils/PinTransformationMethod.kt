@@ -4,7 +4,7 @@ import android.graphics.Rect
 import android.text.method.TransformationMethod
 import android.view.View
 
-class PinTransformationMethod : TransformationMethod {
+internal class PinTransformationMethod : TransformationMethod {
 
     private val BULLET:Char = '\u2022'
 

@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.rpay.sdk.R
 import com.rpay.sdk.adapter.CountryCodeAdapter
 import com.rpay.sdk.base.BaseFragment
+import com.rpay.sdk.core.RPay
 import com.rpay.sdk.core.RPayHandler
 import com.rpay.sdk.databinding.RpayLoginScreenBinding
 import com.rpay.sdk.model.CountryListResponse
@@ -19,7 +20,7 @@ import com.rpay.sdk.utils.Session
 import com.rpay.sdk.viewmodel.LoginViewModel
 
 
-class LoginScreen : BaseFragment() {
+internal class LoginScreen : BaseFragment() {
 
     private lateinit var binding: RpayLoginScreenBinding
     private lateinit var viewModel: LoginViewModel
@@ -123,7 +124,7 @@ class LoginScreen : BaseFragment() {
                     passcode.isEmpty() -> {
                         showToast("Please enter a passcode")
                     }
-                    context?.let { RPayHandler.isNetConnected(it) } == false -> {
+                    context?.let { RPay.isNetConnected(it) } == false -> {
                         showNoInternetDialog()
                     }
                     else -> {
@@ -131,7 +132,7 @@ class LoginScreen : BaseFragment() {
                         params["phone_number"] = ccpPicker.fullNumber
                         params["password"] = password
                         params["pass_code"] = passcode
-                        viewModel.login(params, RPayHandler.getMerchantKey()).observe(viewLifecycleOwner, {
+                        viewModel.login(params, RPay.getMerchantKey()).observe(viewLifecycleOwner, {
                             when (it) {
                                 is NetworkResponse.Loading -> {
                                     /**
@@ -146,7 +147,7 @@ class LoginScreen : BaseFragment() {
                                     hideProgressDialog()
                                     if (it.data?.success.equals("1", true)){
                                         it.data?.data?.auth_token?.let { it1 ->
-                                            RPayHandler.storeAuthToken(it1)
+                                            RPay.storeAuthToken(it1)
                                         }
                                         val extraInfoForSharedElement = FragmentNavigatorExtras(
                                             binding.contentLayout to "content"

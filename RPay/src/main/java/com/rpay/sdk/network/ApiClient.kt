@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-object ApiClient {
+internal object ApiClient {
 
     var BASE_URL:String = "http://192.168.1.180/rpay/rpayusr/v1/"
 
@@ -18,7 +18,8 @@ object ApiClient {
         .create()
 
     private val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)).readTimeout(
+//        .addInterceptor(interceptor.setLevel(HttpLoggingInterceptor.Level.BODY))
+        .readTimeout(
             120,
             TimeUnit.SECONDS
         )
