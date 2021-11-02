@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.rpay.sdk.R
 import com.rpay.sdk.core.RPay
@@ -13,22 +14,13 @@ import com.rpay.sdk.databinding.HomeScreenBinding
 
 class HomeScreen : AppCompatActivity() {
 
-    private lateinit var binding: HomeScreenBinding
     private lateinit var closeDialog: AlertDialog.Builder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = HomeScreenBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.home_screen)
 
         initialize()
-        setUpUi()
-    }
-
-    private fun setUpUi() {
-        binding.apply {
-
-        }
     }
 
     private fun initialize() {
