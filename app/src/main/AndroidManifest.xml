@@ -17,7 +17,7 @@
         tools:replace="android:theme"
         tools:targetApi="n">
         <activity
-            android:name=".PaymentScreenActivity"
+            android:name=".CheckOutScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

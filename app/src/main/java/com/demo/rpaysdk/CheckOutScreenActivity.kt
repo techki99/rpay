@@ -3,20 +3,19 @@ package com.demo.rpaysdk
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import com.demo.rpaysdk.databinding.ActivityPaymentScreenBinding
+import com.demo.rpaysdk.databinding.ActivityCheckoutScreenBinding
 import com.rpay.sdk.core.RPay
 import com.rpay.sdk.listener.RPayListener
 
-class PaymentScreenActivity : AppCompatActivity(), RPayListener {
+class CheckOutScreenActivity : AppCompatActivity(), RPayListener {
 
-    private lateinit var binding: ActivityPaymentScreenBinding
+    private lateinit var binding: ActivityCheckoutScreenBinding
 
     private val merchantKey: String = "$2y$10\$GTExec3NXk7nXaRu5jxJWuXr77jLw6BdgQJY.AHZEImULr4kEh-SO"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityPaymentScreenBinding.inflate(layoutInflater)
+        binding = ActivityCheckoutScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initialize()
@@ -30,15 +29,15 @@ class PaymentScreenActivity : AppCompatActivity(), RPayListener {
                 val currency = currencyEditText.text.toString()
                 when {
                     amount.isEmpty() -> {
-                        Toast.makeText(this@PaymentScreenActivity, "Enter amount", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@CheckOutScreenActivity, "Enter amount", Toast.LENGTH_SHORT).show()
                     }
                     currency.isEmpty() -> {
-                        Toast.makeText(this@PaymentScreenActivity, "Enter currency", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@CheckOutScreenActivity, "Enter currency", Toast.LENGTH_SHORT).show()
                     }
                     else -> {
-                        RPay.init(this@PaymentScreenActivity, merchantKey)
+                        RPay.init(this@CheckOutScreenActivity, merchantKey)
                         RPay.settings(logVisible = true, appName = "ComeNEat")
-                        RPay.setPaymentListener(this@PaymentScreenActivity)
+                        RPay.setPaymentListener(this@CheckOutScreenActivity)
                         RPay.makePayment(amount = amount, currencyCode = currency)
                     }
                 }
