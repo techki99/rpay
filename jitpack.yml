@@ -1,0 +1,5 @@
+jdk:
+  - openjdk11
+before_install:
+  - ./gradlew :RPay:build :RPay:publishToMavenLocal -x :RPay:test
+  - find . -name "*.aar"
