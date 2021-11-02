@@ -2,11 +2,16 @@ package com.rpay.sdk.core
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import com.rpay.sdk.listener.RPayListener
 import com.rpay.sdk.utils.Session
 import com.rpay.sdk.view.activity.HomeScreen
+import java.lang.Exception
 
 @SuppressLint("StaticFieldLeak")
 object RPayHandler {
@@ -137,4 +142,25 @@ object RPayHandler {
         }
     }
 
+    /**
+     * Check Network Connection
+     */
+    fun isNetConnected(context: Context): Boolean {
+        try {
+            val conMgr = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                val capabilities = conMgr.getNetworkCapabilities(
+                    conMgr.activeNetwork
+                )
+                capabilities != null && (capabilities.hasTransport(
+                    NetworkCapabilities.TRANSPORT_CELLULAR
+                ) || capabilities
+                    .hasTransport(NetworkCapabilities.TRANSPORT_WIFI))
+            } else conMgr.activeNetworkInfo != null &&
+                    conMgr.activeNetworkInfo!!.isConnected
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return false
+    }
 }

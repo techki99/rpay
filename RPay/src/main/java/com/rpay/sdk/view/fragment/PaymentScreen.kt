@@ -53,7 +53,16 @@ class PaymentScreen : BaseFragment() {
                     hideProgressDialog()
                     binding.amountTextView.text = RPayHandler.getCurrencyCode() + " " + String.format(Locale.ENGLISH, "%.2f", RPayHandler.getTotalAmount().toDouble())
                     binding.walletBalanceTextView.text = it.data?.data?.api_user_currency + " " + it.data?.data?.api_user_balance?.let { it1 -> String.format(Locale.ENGLISH, "%.2f", it1.toDouble()) }
-                    binding.totalAmountTextView.text = it.data?.data?.deductable_currency + " " + it.data?.data?.deduct_amount + " + " + it.data?.data?.deductable_currency + " " + it.data?.data?.site_fee + " = " + it.data?.data?.deductable_currency + " " + it.data?.data?.deductable_amount?.let { it1 -> String.format(Locale.ENGLISH, "%.2f", it1.toDouble()) }
+                    binding.orderAmountTextView.text = it.data?.data?.deductable_currency + " " + it.data?.data?.deduct_amount
+                    if (it.data?.data?.site_fee?.toDouble() != 0.0) {
+                        binding.rPayFeeTextView.visibility = View.VISIBLE
+                        binding.rPayFeeTitleTextView.visibility = View.VISIBLE
+                        binding.rPayFeeTextView.text = "+ " + it.data?.data?.deductable_currency + " " + it.data?.data?.site_fee
+                    }else {
+                        binding.rPayFeeTextView.visibility = View.GONE
+                        binding.rPayFeeTitleTextView.visibility = View.GONE
+                    }
+                    binding.totalAmountTextView.text = it.data?.data?.deductable_currency + " " + it.data?.data?.deductable_amount?.let { it1 -> String.format(Locale.ENGLISH, "%.2f", it1.toDouble()) }
                 }
                 is NetworkResponse.ErrorResponse -> {
                     hideProgressDialog()
@@ -86,38 +95,42 @@ class PaymentScreen : BaseFragment() {
             }
 
             walletPayButton.setOnClickListener {
-                val headers: HashMap<String, String> = HashMap()
-                headers["secret_key"] = RPayHandler.getMerchantKey()
-                headers["auth_token"] = RPayHandler.getAuthToken()
-                val params: HashMap<String, String> = HashMap()
-                params["amount"] = RPayHandler.getTotalAmount()
-                params["currency"] = RPayHandler.getCurrencyCode()
-                params["description"] = ""
-                viewModel.capturePayment(headers, params).observe(viewLifecycleOwner, {
-                    val listener = RPayHandler.getPaymentListener()
-                    when (it) {
-                        is NetworkResponse.Loading -> {
-                            showProgressDialog()
-                        }
-                        is NetworkResponse.Success -> {
-                            hideProgressDialog()
-                            if (it.data?.data?.status.equals("success", true)){
-                                it.data?.data?.TransactionId?.let { it1 ->
+                if (context?.let { RPayHandler.isNetConnected(it) } == false){
+                    showNoInternetDialog()
+                }else {
+                    val headers: HashMap<String, String> = HashMap()
+                    headers["secret_key"] = RPayHandler.getMerchantKey()
+                    headers["auth_token"] = RPayHandler.getAuthToken()
+                    val params: HashMap<String, String> = HashMap()
+                    params["amount"] = RPayHandler.getTotalAmount()
+                    params["currency"] = RPayHandler.getCurrencyCode()
+                    params["description"] = ""
+                    viewModel.capturePayment(headers, params).observe(viewLifecycleOwner, {
+                        val listener = RPayHandler.getPaymentListener()
+                        when (it) {
+                            is NetworkResponse.Loading -> {
+                                showProgressDialog()
+                            }
+                            is NetworkResponse.Success -> {
+                                hideProgressDialog()
+                                if (it.data?.data?.status.equals("success", true)){
+                                    it.data?.data?.TransactionId?.let { it1 ->
+                                        activity?.finishAndRemoveTask()
+                                        listener.onTransactionSuccess(it1)
+                                    }
+                                }else {
                                     activity?.finishAndRemoveTask()
-                                    listener.onTransactionSuccess(it1)
+                                    listener.onTransactionFailure("Transaction failed")
                                 }
-                            }else {
+                            }
+                            is NetworkResponse.ErrorResponse -> {
+                                hideProgressDialog()
                                 activity?.finishAndRemoveTask()
                                 listener.onTransactionFailure("Transaction failed")
                             }
                         }
-                        is NetworkResponse.ErrorResponse -> {
-                            hideProgressDialog()
-                            activity?.finishAndRemoveTask()
-                            listener.onTransactionFailure("Transaction failed")
-                        }
-                    }
-                })
+                    })
+                }
             }
         }
     }

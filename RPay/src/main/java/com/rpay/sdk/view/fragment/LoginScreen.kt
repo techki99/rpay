@@ -51,7 +51,6 @@ class LoginScreen : BaseFragment() {
         initialize()
         setUpUi()
         setUpCountryList()
-
     }
 
     private fun setUpCountryList() {
@@ -128,6 +127,9 @@ class LoginScreen : BaseFragment() {
                     }
                     passcode.isEmpty() -> {
                         showToast("Please enter a passcode")
+                    }
+                    context?.let { RPayHandler.isNetConnected(it) } == false -> {
+                        showNoInternetDialog()
                     }
                     else -> {
                         val params: HashMap<String, String> = HashMap()

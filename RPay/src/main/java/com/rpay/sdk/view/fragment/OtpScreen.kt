@@ -62,42 +62,52 @@ class OtpScreen : BaseFragment() {
                 override fun onDataEntered(pin: Pinview?, fromUser: Boolean) {
                     if (pin != null) {
                         if (otp.equals(pin.value, true)){
-                            val headers: HashMap<String, String> = HashMap()
-                            headers["secret_key"] = RPayHandler.getMerchantKey()
-                            headers["auth_token"] = RPayHandler.getAuthToken()
-                            val params: HashMap<String, String> = HashMap()
-                            params["otp"] = pin.value
-                            pinView.clearValue()
-                            pinView.clearFocus()
-                            val iMm = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-                            iMm.hideSoftInputFromWindow(view?.windowToken, 0)
-                            view?.clearFocus()
-                            viewModel.getOTPStatus(params, headers).observe(viewLifecycleOwner, {
-                                when (it) {
-                                    is NetworkResponse.Loading -> {
-                                        /**
-                                         * Show Progress Dialog
-                                         */
-                                        showProgressDialog()
-                                    }
-                                    is NetworkResponse.Success -> {
-                                        /**
-                                         * Handle Success Event
-                                         */
-                                        hideProgressDialog()
-                                        if (it.data?.success.equals("1")){
-                                            findNavController().navigate(R.id.action_otpScreen_to_paymentScreen)
+                            if (context?.let { RPayHandler.isNetConnected(it) } == false){
+                                showNoInternetDialog()
+                            }else {
+                                val headers: HashMap<String, String> = HashMap()
+                                headers["secret_key"] = RPayHandler.getMerchantKey()
+                                headers["auth_token"] = RPayHandler.getAuthToken()
+                                val params: HashMap<String, String> = HashMap()
+                                params["otp"] = pin.value
+                                pinView.clearValue()
+                                pinView.clearFocus()
+                                val iMm =
+                                    context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                                iMm.hideSoftInputFromWindow(view?.windowToken, 0)
+                                view?.clearFocus()
+                                viewModel.getOTPStatus(params, headers)
+                                    .observe(viewLifecycleOwner, {
+                                        when (it) {
+                                            is NetworkResponse.Loading -> {
+                                                /**
+                                                 * Show Progress Dialog
+                                                 */
+                                                showProgressDialog()
+                                            }
+                                            is NetworkResponse.Success -> {
+                                                /**
+                                                 * Handle Success Event
+                                                 */
+                                                hideProgressDialog()
+                                                if (it.data?.success.equals("1")) {
+                                                    findNavController().navigate(R.id.action_otpScreen_to_paymentScreen)
+                                                }
+                                            }
+                                            is NetworkResponse.ErrorResponse -> {
+                                                /**
+                                                 * Handle Failure Event
+                                                 */
+                                                hideProgressDialog()
+                                                it.errorResponse?.message?.let { it1 ->
+                                                    showToast(
+                                                        it1
+                                                    )
+                                                }
+                                            }
                                         }
-                                    }
-                                    is NetworkResponse.ErrorResponse -> {
-                                        /**
-                                         * Handle Failure Event
-                                         */
-                                        hideProgressDialog()
-                                        it.errorResponse?.message?.let { it1 -> showToast(it1) }
-                                    }
-                                }
-                            })
+                                    })
+                            }
                         }else {
                             showToast("Incorrect OTP")
                             pinView.clearValue()

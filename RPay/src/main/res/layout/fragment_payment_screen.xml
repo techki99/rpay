@@ -78,39 +78,91 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/feeTextView"
+        android:id="@+id/orderAmountTitleTextView"
         app:layout_constraintTop_toBottomOf="@id/headerLayout"
         android:layout_marginTop="@dimen/space_20"
         android:layout_marginStart="@dimen/space_20"
         android:layout_marginEnd="@dimen/space_20"
-        android:textSize="@dimen/font_title_size"
+        android:textSize="@dimen/font_h7_size"
         android:textColor="@color/black"
-        android:text="@string/totalAmountToBePaid"
+        android:text="@string/orderAmount"
         android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/orderAmountTextView"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        android:layout_marginTop="@dimen/space_20"
+        android:layout_marginStart="@dimen/space_14"
+        android:layout_marginEnd="@dimen/space_20"
+        android:textSize="@dimen/font_h7_size"
+        android:textColor="@color/black"
+        android:gravity="center"
+        app:layout_constraintStart_toEndOf="@id/orderAmountTitleTextView"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/totalAmountTextView"
-        app:layout_constraintTop_toBottomOf="@id/feeTextView"
+        android:id="@+id/rPayFeeTitleTextView"
+        app:layout_constraintTop_toBottomOf="@id/orderAmountTitleTextView"
         android:layout_marginTop="@dimen/space_10"
         android:layout_marginStart="@dimen/space_20"
         android:textSize="@dimen/font_h7_size"
         android:textColor="@color/black"
         android:gravity="center"
-        android:textStyle="bold"
         android:layout_marginEnd="@dimen/space_20"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:text="@string/rPayFee"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rPayFeeTextView"
+        app:layout_constraintTop_toBottomOf="@id/orderAmountTitleTextView"
+        android:layout_marginTop="@dimen/space_10"
+        android:layout_marginStart="@dimen/space_14"
+        android:layout_marginEnd="@dimen/space_20"
+        android:textSize="@dimen/font_h7_size"
+        android:textColor="@color/black"
+        android:gravity="center"
+        app:layout_constraintStart_toEndOf="@id/orderAmountTitleTextView"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/totalAmountTitleTextView"
+        app:layout_constraintTop_toBottomOf="@id/rPayFeeTitleTextView"
+        android:layout_marginTop="@dimen/space_10"
+        android:layout_marginStart="@dimen/space_20"
+        android:textSize="@dimen/font_h7_size"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:text="@string/totalAmount"
+        android:textStyle="bold"
+        android:layout_marginEnd="@dimen/space_20"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/totalAmountTextView"
+        app:layout_constraintTop_toBottomOf="@id/rPayFeeTitleTextView"
+        android:layout_marginTop="@dimen/space_10"
+        android:layout_marginStart="@dimen/space_14"
+        android:layout_marginEnd="@dimen/space_20"
+        android:textSize="@dimen/font_h7_size"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:gravity="center"
+        app:layout_constraintStart_toEndOf="@id/orderAmountTitleTextView"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/selectTitleTextView"
-        app:layout_constraintTop_toBottomOf="@id/totalAmountTextView"
+        app:layout_constraintTop_toBottomOf="@id/totalAmountTitleTextView"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="@dimen/space_32"
         android:layout_marginStart="@dimen/space_20"
@@ -171,11 +223,25 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/walletBalanceTitleTextView"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/font_title_size"
+                android:gravity="center"
+                android:text="Wallet Balance"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="@dimen/space_10"
+                app:layout_constraintBottom_toTopOf="@id/walletBalanceTextView"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/walletBalanceTextView"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/font_h7_size"
-                app:layout_constraintTop_toTopOf="parent"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/walletBalanceTitleTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="@dimen/space_10"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -209,6 +275,7 @@
         android:id="@+id/cardLayout"
         android:alpha="0.6"
         app:cardElevation="0dp"
+        android:visibility="gone"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/space_12"
         android:layout_marginTop="@dimen/space_20"

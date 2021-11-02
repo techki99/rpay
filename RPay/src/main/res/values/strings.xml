@@ -15,4 +15,7 @@
     <string name="payWithWallet">Pay with wallet</string>
     <string name="payWithCard">Pay with card</string>
     <string name="pay">Pay</string>
+    <string name="orderAmount">Order Amount : </string>
+    <string name="rPayFee">RPay Fee : </string>
+    <string name="totalAmount">Total Amount : </string>
 </resources>

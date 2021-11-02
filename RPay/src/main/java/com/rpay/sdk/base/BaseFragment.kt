@@ -1,6 +1,8 @@
 package com.rpay.sdk.base
 
+import android.app.AlertDialog
 import android.app.Dialog
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -12,6 +14,7 @@ import android.view.Window
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.rpay.sdk.R
+import com.rpay.sdk.core.RPay
 
 open class BaseFragment : Fragment() {
 
@@ -46,4 +49,13 @@ open class BaseFragment : Fragment() {
         toast.show()
     }
 
+    fun showNoInternetDialog() {
+        val internetDialog = AlertDialog.Builder(context)
+        internetDialog.setCancelable(false)
+        internetDialog.setMessage("Please check your internet connection")
+        internetDialog.setPositiveButton("Ok", DialogInterface.OnClickListener { dialogInterface, i ->
+            dialogInterface.dismiss()
+        })
+        internetDialog.show()
+    }
 }
