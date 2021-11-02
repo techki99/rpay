@@ -5,16 +5,11 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.view.Window
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.rpay.sdk.R
-import com.rpay.sdk.core.RPay
 
 open class BaseFragment : Fragment() {
 
@@ -24,7 +19,7 @@ open class BaseFragment : Fragment() {
         try {
             progressDialog = context?.let { Dialog(it) }!!
             progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            progressDialog.setContentView(R.layout.progressbar)
+            progressDialog.setContentView(R.layout.rpay_progressbar)
             progressDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             progressDialog.window?.setLayout(
                 LinearLayout.LayoutParams.WRAP_CONTENT,

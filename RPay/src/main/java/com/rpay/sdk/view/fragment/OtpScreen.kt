@@ -18,7 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.rpay.sdk.R
 import com.rpay.sdk.base.BaseFragment
 import com.rpay.sdk.core.RPayHandler
-import com.rpay.sdk.databinding.FragmentOtpScreenBinding
+import com.rpay.sdk.databinding.RpayOtpScreenBinding
 import com.rpay.sdk.utils.NetworkResponse
 import com.rpay.sdk.utils.Pinview
 import com.rpay.sdk.viewmodel.OTPScreenViewModel
@@ -26,7 +26,7 @@ import com.rpay.sdk.viewmodel.OTPScreenViewModel
 
 class OtpScreen : BaseFragment() {
 
-    private lateinit var binding: FragmentOtpScreenBinding
+    private lateinit var binding: RpayOtpScreenBinding
     private lateinit var viewModel: OTPScreenViewModel
 
     private var otp: String = ""
@@ -37,7 +37,7 @@ class OtpScreen : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = FragmentOtpScreenBinding.inflate(layoutInflater)
+        binding = RpayOtpScreenBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -91,7 +91,7 @@ class OtpScreen : BaseFragment() {
                                                  */
                                                 hideProgressDialog()
                                                 if (it.data?.success.equals("1")) {
-                                                    findNavController().navigate(R.id.action_otpScreen_to_paymentScreen)
+                                                    findNavController().navigate(R.id.action_rPayOtpScreen_to_rPayPaymentScreen)
                                                 }
                                             }
                                             is NetworkResponse.ErrorResponse -> {

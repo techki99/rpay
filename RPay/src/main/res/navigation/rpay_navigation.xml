@@ -3,29 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rpay_navigation"
-    app:startDestination="@id/loginScreen">
+    app:startDestination="@id/rPayLoginScreen">
 
     <fragment
-        android:id="@+id/loginScreen"
+        android:id="@+id/rPayLoginScreen"
         android:name="com.rpay.sdk.view.fragment.LoginScreen"
-        android:label="fragment_login_screen"
-        tools:layout="@layout/fragment_login_screen" >
+        android:label="rpay_login_screen"
+        tools:layout="@layout/rpay_login_screen" >
         <action
-            android:id="@+id/action_loginScreen_to_otpScreen"
-            app:destination="@id/otpScreen" />
+            android:id="@+id/action_rPayLoginScreen_to_rPayOtpScreen"
+            app:destination="@id/rPayOtpScreen" />
     </fragment>
     <fragment
-        android:id="@+id/otpScreen"
+        android:id="@+id/rPayOtpScreen"
         android:name="com.rpay.sdk.view.fragment.OtpScreen"
-        android:label="fragment_otp_screen"
-        tools:layout="@layout/fragment_otp_screen" >
+        android:label="rpay_otp_screen"
+        tools:layout="@layout/rpay_otp_screen" >
         <action
-            android:id="@+id/action_otpScreen_to_paymentScreen"
-            app:destination="@id/paymentScreen" />
+            android:id="@+id/action_rPayOtpScreen_to_rPayPaymentScreen"
+            app:destination="@id/rPayPaymentScreen" />
     </fragment>
     <fragment
-        android:id="@+id/paymentScreen"
+        android:id="@+id/rPayPaymentScreen"
         android:name="com.rpay.sdk.view.fragment.PaymentScreen"
-        android:label="fragment_payment_screen"
-        tools:layout="@layout/fragment_payment_screen" />
+        android:label="rpay_payment_screen"
+        tools:layout="@layout/rpay_payment_screen" />
 </navigation>

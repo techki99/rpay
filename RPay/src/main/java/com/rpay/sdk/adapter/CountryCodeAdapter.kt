@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.bumptech.glide.Glide
-import com.rpay.sdk.databinding.CountryListItemBinding
+import com.rpay.sdk.databinding.RpayCountryListItemBinding
 import com.rpay.sdk.model.CountryListResponse
 
 class CountryCodeAdapter(val context: Context, private val countryList: ArrayList<CountryListResponse.CountryList>): BaseAdapter() {
@@ -27,7 +27,7 @@ class CountryCodeAdapter(val context: Context, private val countryList: ArrayLis
     @SuppressLint("ViewHolder")
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
         val inflater = LayoutInflater.from(context)
-        val view = CountryListItemBinding.inflate(inflater)
+        val view = RpayCountryListItemBinding.inflate(inflater)
 
         var countryCode = countryList[p0].country_code
         if (countryCode == "+1868") {

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.rpay.sdk.base.BaseFragment
 import com.rpay.sdk.core.RPayHandler
-import com.rpay.sdk.databinding.FragmentPaymentScreenBinding
+import com.rpay.sdk.databinding.RpayPaymentScreenBinding
 import com.rpay.sdk.utils.NetworkResponse
 import com.rpay.sdk.viewmodel.PaymentScreenViewModel
 import java.util.*
@@ -16,7 +16,7 @@ import kotlin.collections.HashMap
 
 class PaymentScreen : BaseFragment() {
 
-    private lateinit var binding: FragmentPaymentScreenBinding
+    private lateinit var binding: RpayPaymentScreenBinding
     private lateinit var viewModel: PaymentScreenViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +25,7 @@ class PaymentScreen : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentPaymentScreenBinding.inflate(layoutInflater)
+        binding = RpayPaymentScreenBinding.inflate(layoutInflater)
         return binding.root
     }
 

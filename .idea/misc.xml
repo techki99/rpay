@@ -20,6 +20,9 @@
         <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/layout/payment_screen.xml" value="0.2" />
         <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/layout/proceed_bottom_sheet.xml" value="0.2" />
         <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/layout/progressbar.xml" value="0.2" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/layout/rpay_home_screen.xml" value="0.2" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/layout/rpay_payment_screen.xml" value="0.25" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/layout/rpay_progressbar.xml" value="0.2" />
         <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/xml/network_security_config.xml" value="0.2" />
         <entry key="..\:/Gowtham/SDK/RPaySDK/app/src/main/res/layout/activity_main.xml" value="0.11944444444444445" />
         <entry key="..\:/Gowtham/SDK/RPaySDK/app/src/main/res/layout/activity_payment_screen.xml" value="0.2" />

@@ -81,7 +81,7 @@
         android:id="@+id/orderAmountTitleTextView"
         app:layout_constraintTop_toBottomOf="@id/headerLayout"
         android:layout_marginTop="@dimen/space_20"
-        android:layout_marginStart="@dimen/space_20"
+        android:layout_marginStart="@dimen/space_32"
         android:layout_marginEnd="@dimen/space_20"
         android:textSize="@dimen/font_h7_size"
         android:textColor="@color/black"
@@ -95,12 +95,11 @@
         android:id="@+id/orderAmountTextView"
         app:layout_constraintTop_toBottomOf="@id/headerLayout"
         android:layout_marginTop="@dimen/space_20"
-        android:layout_marginStart="@dimen/space_14"
-        android:layout_marginEnd="@dimen/space_20"
+        android:layout_marginEnd="@dimen/space_32"
         android:textSize="@dimen/font_h7_size"
         android:textColor="@color/black"
         android:gravity="center"
-        app:layout_constraintStart_toEndOf="@id/orderAmountTitleTextView"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:layout_width="0dp"
@@ -108,7 +107,7 @@
         android:id="@+id/rPayFeeTitleTextView"
         app:layout_constraintTop_toBottomOf="@id/orderAmountTitleTextView"
         android:layout_marginTop="@dimen/space_10"
-        android:layout_marginStart="@dimen/space_20"
+        android:layout_marginStart="@dimen/space_32"
         android:textSize="@dimen/font_h7_size"
         android:textColor="@color/black"
         android:gravity="center"
@@ -122,12 +121,11 @@
         android:id="@+id/rPayFeeTextView"
         app:layout_constraintTop_toBottomOf="@id/orderAmountTitleTextView"
         android:layout_marginTop="@dimen/space_10"
-        android:layout_marginStart="@dimen/space_14"
-        android:layout_marginEnd="@dimen/space_20"
+        android:layout_marginEnd="@dimen/space_32"
         android:textSize="@dimen/font_h7_size"
         android:textColor="@color/black"
         android:gravity="center"
-        app:layout_constraintStart_toEndOf="@id/orderAmountTitleTextView"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
         android:layout_width="0dp"
@@ -135,7 +133,7 @@
         android:id="@+id/totalAmountTitleTextView"
         app:layout_constraintTop_toBottomOf="@id/rPayFeeTitleTextView"
         android:layout_marginTop="@dimen/space_10"
-        android:layout_marginStart="@dimen/space_20"
+        android:layout_marginStart="@dimen/space_32"
         android:textSize="@dimen/font_h7_size"
         android:textColor="@color/black"
         android:gravity="center"
@@ -150,13 +148,12 @@
         android:id="@+id/totalAmountTextView"
         app:layout_constraintTop_toBottomOf="@id/rPayFeeTitleTextView"
         android:layout_marginTop="@dimen/space_10"
-        android:layout_marginStart="@dimen/space_14"
-        android:layout_marginEnd="@dimen/space_20"
+        android:layout_marginEnd="@dimen/space_32"
         android:textSize="@dimen/font_h7_size"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:gravity="center"
-        app:layout_constraintStart_toEndOf="@id/orderAmountTitleTextView"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
         android:layout_width="wrap_content"

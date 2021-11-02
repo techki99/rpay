@@ -1,23 +1,18 @@
 package com.rpay.sdk.view.fragment
 
 import android.os.Bundle
-import android.util.Pair as UtilPair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import androidx.core.app.ActivityOptionsCompat
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import com.hbb20.CountryCodePicker.PhoneNumberValidityChangeListener
 import com.rpay.sdk.R
 import com.rpay.sdk.adapter.CountryCodeAdapter
 import com.rpay.sdk.base.BaseFragment
 import com.rpay.sdk.core.RPayHandler
-import com.rpay.sdk.databinding.FragmentLoginScreenBinding
+import com.rpay.sdk.databinding.RpayLoginScreenBinding
 import com.rpay.sdk.model.CountryListResponse
 import com.rpay.sdk.utils.NetworkResponse
 import com.rpay.sdk.utils.Session
@@ -26,7 +21,7 @@ import com.rpay.sdk.viewmodel.LoginViewModel
 
 class LoginScreen : BaseFragment() {
 
-    private lateinit var binding: FragmentLoginScreenBinding
+    private lateinit var binding: RpayLoginScreenBinding
     private lateinit var viewModel: LoginViewModel
     private lateinit var session: Session
 
@@ -41,7 +36,7 @@ class LoginScreen : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = FragmentLoginScreenBinding.inflate(layoutInflater)
+        binding = RpayLoginScreenBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -160,7 +155,7 @@ class LoginScreen : BaseFragment() {
                                         if (otp.isNotEmpty()){
                                             val bundle = Bundle()
                                             bundle.putString("otp", otp)
-                                            findNavController().navigate(R.id.action_loginScreen_to_otpScreen, bundle, null, extraInfoForSharedElement)
+                                            findNavController().navigate(R.id.action_rPayLoginScreen_to_rPayOtpScreen, bundle, null, extraInfoForSharedElement)
                                         }
                                     }else {
                                         it.data?.message?.let { it1 -> showToast(it1) }
