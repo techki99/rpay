@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PaymentScreenActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:id="@+id/demoImage"
+        android:scaleType="centerCrop"
+        android:src="@drawable/mobile"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/app_name"/>
+
+
+    <EditText
+        android:id="@+id/currencyEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:hint="@string/currency"
+        android:inputType="textCapCharacters"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:padding="14dp"
+        android:text="INR"
+        app:layout_constraintTop_toBottomOf="@id/demoImage"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        tools:ignore="Autofill" />
+
+    <EditText
+        android:id="@+id/amountEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
+        android:hint="@string/price"
+        android:inputType="numberDecimal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:padding="14dp"
+        android:text="20"
+        app:layout_constraintTop_toBottomOf="@id/currencyEditText"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        tools:ignore="Autofill" />
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/amountEditText"
+        android:id="@+id/payButton"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="30dp"
+        android:background="#009688"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="@string/pay"
+        android:textAllCaps="true"
+        android:textColor="@color/white" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

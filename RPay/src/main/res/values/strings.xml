@@ -1,0 +1,18 @@
+<resources>
+
+    <string name="mobileNumber">Mobile Number</string>
+    <string name="imageContent">image</string>
+    <string name="Password">Password</string>
+    <string name="passcode">Passcode</string>
+    <string name="processing">PROCESSING</string>
+    <string name="login">Login</string>
+    <string name="loadingHint">Kindly <b>DO NOT</b> close or \n click back button</string>
+    <string name="OTPBanner">Sit back &amp; Relax! while we verify your \n account</string>
+    <string name="OtpToast">( Enter the OTP below in case if we fail to detect the \n SMS automatically )</string>
+    <string name="amountToBePaid">Amount to be paid</string>
+    <string name="totalAmountToBePaid"><b>Total amount to be paid : </b>Total Amount + Fee</string>
+    <string name="selectAnOption">SELECT AN OPTION TO PAY</string>
+    <string name="payWithWallet">Pay with wallet</string>
+    <string name="payWithCard">Pay with card</string>
+    <string name="pay">Pay</string>
+</resources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/drawable/app_logo.xml" value="0.16203703703703703" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/drawable/app_logo_color.xml" value="0.21614583333333334" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/drawable/bg_bottom_round.xml" value="0.21614583333333334" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/drawable/bg_round_corner.xml" value="0.16203703703703703" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/drawable/sample_background.xml" value="0.21614583333333334" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/drawable/white_round.xml" value="0.21614583333333334" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/layout/activity_payment_screen.xml" value="0.1859375" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/layout/close_dialog.xml" value="0.2" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/layout/country_list_item.xml" value="0.2" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/layout/fragment_login_screen.xml" value="0.2" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/layout/fragment_otp_screen.xml" value="0.25" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/layout/fragment_payment_screen.xml" value="0.2" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/layout/otp_view_layout.xml" value="0.2" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/layout/payment_screen.xml" value="0.2" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/layout/proceed_bottom_sheet.xml" value="0.2" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/layout/progressbar.xml" value="0.2" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/RPay/src/main/res/xml/network_security_config.xml" value="0.2" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/app/src/main/res/layout/activity_main.xml" value="0.11944444444444445" />
+        <entry key="..\:/Gowtham/SDK/RPaySDK/app/src/main/res/layout/activity_payment_screen.xml" value="0.2" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

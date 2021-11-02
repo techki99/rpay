@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/loginScreen">
+
+    <fragment
+        android:id="@+id/loginScreen"
+        android:name="com.rpay.sdk.view.fragment.LoginScreen"
+        android:label="fragment_login_screen"
+        tools:layout="@layout/fragment_login_screen" >
+        <action
+            android:id="@+id/action_loginScreen_to_otpScreen"
+            app:destination="@id/otpScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/otpScreen"
+        android:name="com.rpay.sdk.view.fragment.OtpScreen"
+        android:label="fragment_otp_screen"
+        tools:layout="@layout/fragment_otp_screen" >
+        <action
+            android:id="@+id/action_otpScreen_to_paymentScreen"
+            app:destination="@id/paymentScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentScreen"
+        android:name="com.rpay.sdk.view.fragment.PaymentScreen"
+        android:label="fragment_payment_screen"
+        tools:layout="@layout/fragment_payment_screen" />
+</navigation>

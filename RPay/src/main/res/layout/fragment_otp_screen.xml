@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/hint_color"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:id="@+id/bgRound"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/bg_bottom_round"/>
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="@dimen/space_200"
+        android:layout_height="@dimen/space_72"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/imageContent"
+        android:padding="@dimen/space_4"
+        android:src="@drawable/app_logo_color"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hintTextView"
+        app:layout_constraintTop_toBottomOf="@id/logoImageView"
+        android:text="Digital Payment Solution"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_h7_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/space_10"
+        android:textStyle="bold"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/contentLayout"
+        android:transitionName="content"
+        app:layout_constraintTop_toBottomOf="@id/bgRound"
+        app:layout_constraintBottom_toBottomOf="@id/bgRound"
+        android:layout_marginStart="@dimen/space_24"
+        android:layout_marginEnd="@dimen/space_24"
+        app:cardCornerRadius="@dimen/space_12">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/titleTextView"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="OTP Verification"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_h7_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/space_14"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/topTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/normal"
+                app:layout_constraintTop_toBottomOf="@id/titleTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center"
+                android:text="@string/OTPBanner"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/normal"
+                android:gravity="center"
+                android:id="@+id/otpHint"
+                app:layout_constraintTop_toBottomOf="@id/topTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/OtpToast"
+                android:textSize="10sp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_80"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/space_32"
+                android:id="@+id/otpLayout"
+                app:layout_constraintTop_toBottomOf="@id/otpHint"
+                android:layout_marginTop="@dimen/space_20">
+
+                <com.rpay.sdk.utils.Pinview
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pinView"
+                    app:inputType="number"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
