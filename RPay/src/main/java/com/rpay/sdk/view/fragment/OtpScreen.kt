@@ -1,6 +1,10 @@
 package com.rpay.sdk.view.fragment
 
 import android.app.Activity
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -14,14 +18,17 @@ import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.ViewModelProvider
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
 import com.rpay.sdk.R
 import com.rpay.sdk.base.BaseFragment
 import com.rpay.sdk.core.RPay
 import com.rpay.sdk.core.RPayHandler
 import com.rpay.sdk.databinding.RpayOtpScreenBinding
+import com.rpay.sdk.listener.OTPReceiverListener
 import com.rpay.sdk.utils.NetworkResponse
 import com.rpay.sdk.utils.Pinview
+import com.rpay.sdk.utils.SMSBroadcastReceiver
 import com.rpay.sdk.viewmodel.OTPScreenViewModel
 
 
@@ -51,6 +58,14 @@ internal class OtpScreen : BaseFragment() {
 
     private fun initialize() {
         viewModel = ViewModelProvider(this).get(OTPScreenViewModel::class.java)
+        activity?.let { LocalBroadcastManager.getInstance(it).registerReceiver(receiver, IntentFilter("OTP")) }
+    }
+
+    private val receiver = object : BroadcastReceiver() {
+        override fun onReceive(p0: Context?, p1: Intent?) {
+            otp = p1?.getStringExtra("otp")!!
+            binding.pinView.value = otp
+        }
     }
 
     private fun setUpUi() {
@@ -92,6 +107,7 @@ internal class OtpScreen : BaseFragment() {
                                                  */
                                                 hideProgressDialog()
                                                 if (it.data?.success.equals("1")) {
+                                                    showToast("OTP verified successfully")
                                                     findNavController().navigate(R.id.action_rPayOtpScreen_to_rPayPaymentScreen)
                                                 }
                                             }
@@ -117,6 +133,15 @@ internal class OtpScreen : BaseFragment() {
                     }
                 }
             })
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        try {
+            activity?.let { LocalBroadcastManager.getInstance(it).unregisterReceiver(receiver) }
+        }catch (e: Exception){
+            e.printStackTrace()
         }
     }
 

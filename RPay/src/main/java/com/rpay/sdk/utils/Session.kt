@@ -78,4 +78,16 @@ internal object Session {
     fun getAppName(): String {
         return details.getString("appName", "").toString()
     }
+
+    fun setLoggedIn(key: Boolean) {
+        detailsEditor.putBoolean("loggedIn", key).commit()
+    }
+
+    fun isLoggedIn(): Boolean {
+        return details.getBoolean("loggedIn", false)
+    }
+
+    fun clearData() {
+        detailsEditor.clear().commit()
+    }
 }

@@ -12,7 +12,6 @@ import com.rpay.sdk.R
 import com.rpay.sdk.adapter.CountryCodeAdapter
 import com.rpay.sdk.base.BaseFragment
 import com.rpay.sdk.core.RPay
-import com.rpay.sdk.core.RPayHandler
 import com.rpay.sdk.databinding.RpayLoginScreenBinding
 import com.rpay.sdk.model.CountryListResponse
 import com.rpay.sdk.utils.NetworkResponse

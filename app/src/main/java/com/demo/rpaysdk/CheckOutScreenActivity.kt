@@ -37,7 +37,7 @@ class CheckOutScreenActivity : AppCompatActivity(), RPayListener {
                     }
                     else -> {
                         RPay.init(this@CheckOutScreenActivity, merchantKey)
-                        RPay.settings(logVisible = true)
+                        RPay.settings(logVisible = true, appName = "ComeNEat")
                         RPay.setPaymentListener(this@CheckOutScreenActivity)
                         RPay.makePayment(amount = amount.toDouble(), currencyCode = currency)
                     }

@@ -73,6 +73,10 @@ dependencies {
     //CCP
     implementation 'com.hbb20:ccp:2.5.4'
 
+    //OTP Detection
+    implementation 'com.google.android.gms:play-services-base:17.6.0'
+    implementation "com.google.android.gms:play-services-auth-api-phone:17.5.1"
+
 }
 
 afterEvaluate {

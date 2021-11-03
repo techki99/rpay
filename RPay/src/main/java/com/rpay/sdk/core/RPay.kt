@@ -117,4 +117,25 @@ object RPay {
         return rPayHandler?.getAppName()
     }
 
+    /**
+     * Store Login Status
+     */
+    internal fun setLoggedIn(key: Boolean) {
+        rPayHandler?.setLoggedIn(key)
+    }
+
+    /**
+     * Get Login Status
+     */
+    internal fun isLoggedIn(): Boolean? {
+        return rPayHandler?.isLoggedIn()
+    }
+
+    /**
+     * Clear All Data
+     */
+    internal fun clearData() {
+        rPayHandler?.clearData()
+    }
+
 }

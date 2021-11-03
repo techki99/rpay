@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 
 internal object ApiClient {
 
-    var BASE_URL:String = "http://192.168.1.180/rpay/rpayusr/v1/"
+    var BASE_URL:String = "http://192.168.1.154/rpay/rpayusr/v1/"
 
     private val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor()
 
@@ -18,7 +18,7 @@ internal object ApiClient {
         .create()
 
     private val okHttpClient = OkHttpClient.Builder()
-//        .addInterceptor(interceptor.setLevel(HttpLoggingInterceptor.Level.BODY))
+        //.addInterceptor(interceptor.setLevel(HttpLoggingInterceptor.Level.BODY))
         .readTimeout(
             120,
             TimeUnit.SECONDS

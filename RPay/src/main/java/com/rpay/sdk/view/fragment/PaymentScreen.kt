@@ -20,6 +20,8 @@ internal class PaymentScreen : BaseFragment() {
     private lateinit var binding: RpayPaymentScreenBinding
     private lateinit var viewModel: PaymentScreenViewModel
 
+    private var walletStatus: String = "success"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,8 +54,15 @@ internal class PaymentScreen : BaseFragment() {
                 }
                 is NetworkResponse.Success -> {
                     hideProgressDialog()
+                    walletStatus = if (it.data?.message.equals("You dont have enough balance for this transaction.", true)) {
+                        binding.errorTextView.visibility = View.VISIBLE
+                        "failure"
+                    }else {
+                        binding.errorTextView.visibility = View.GONE
+                        "success"
+                    }
                     binding.amountTextView.text = RPay.getCurrencyCode() + " " + String.format(Locale.ENGLISH, "%.2f", RPay.getTotalAmount().toDouble())
-                    binding.walletBalanceTextView.text = it.data?.data?.api_user_currency + " " + it.data?.data?.api_user_balance?.let { it1 -> String.format(Locale.ENGLISH, "%.2f", it1.toDouble()) }
+                    binding.walletBalanceTextView.text = it.data?.data?.api_user_currency + " " + it.data?.data?.api_user_balance
                     binding.orderAmountTextView.text = it.data?.data?.deductable_currency + " " + it.data?.data?.deduct_amount
                     if (it.data?.data?.site_fee?.toDouble() != 0.0) {
                         binding.rPayFeeTextView.visibility = View.VISIBLE
@@ -63,7 +72,7 @@ internal class PaymentScreen : BaseFragment() {
                         binding.rPayFeeTextView.visibility = View.GONE
                         binding.rPayFeeTitleTextView.visibility = View.GONE
                     }
-                    binding.totalAmountTextView.text = it.data?.data?.deductable_currency + " " + it.data?.data?.deductable_amount?.let { it1 -> String.format(Locale.ENGLISH, "%.2f", it1.toDouble()) }
+                    binding.totalAmountTextView.text = it.data?.data?.deductable_currency + " " + it.data?.data?.deductable_amount
                 }
                 is NetworkResponse.ErrorResponse -> {
                     hideProgressDialog()
@@ -82,17 +91,22 @@ internal class PaymentScreen : BaseFragment() {
             merchantNameTextView.text = RPay.getAppName()
 
             walletLayout.setOnClickListener {
-                walletLayout.alpha = 1f
-                walletPayButton.visibility = View.VISIBLE
-                cardLayout.alpha = 0.6f
+                if (walletStatus.equals("success", true)) {
+                    walletLayout.alpha = 1f
+                    walletPayButton.visibility = View.VISIBLE
+                    cardLayout.alpha = 0.6f
+                    errorTextView.visibility = View.GONE
+                }
             }
+
+            RPay.setLoggedIn(true)
 
             cardLayout.setOnClickListener {
                 walletLayout.alpha = 0.6f
                 walletPayButton.visibility = View.GONE
                 cardLayout.alpha = 1f
                 val proceedToPay = ProceedBottomSheet()
-                proceedToPay.show(parentFragmentManager, "Proceed")
+                proceedToPay.show(childFragmentManager, "Proceed")
             }
 
             walletPayButton.setOnClickListener {
@@ -118,16 +132,19 @@ internal class PaymentScreen : BaseFragment() {
                                     it.data?.data?.TransactionId?.let { it1 ->
                                         activity?.finishAndRemoveTask()
                                         listener.onTransactionSuccess(it1)
+                                        RPay.clearData()
                                     }
                                 }else {
                                     activity?.finishAndRemoveTask()
                                     listener.onTransactionFailure("Transaction failed")
+                                    RPay.clearData()
                                 }
                             }
                             is NetworkResponse.ErrorResponse -> {
                                 hideProgressDialog()
                                 activity?.finishAndRemoveTask()
                                 listener.onTransactionFailure("Transaction failed")
+                                RPay.clearData()
                             }
                         }
                     })

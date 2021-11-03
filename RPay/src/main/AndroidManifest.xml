@@ -16,6 +16,11 @@
             android:windowSoftInputMode="stateAlwaysHidden"
             android:theme="@style/Theme.RPay"
             android:screenOrientation="portrait"/>
+        <receiver android:name=".utils.SMSBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED" />
+            </intent-filter>
+        </receiver>
     </application>
-
 </manifest>

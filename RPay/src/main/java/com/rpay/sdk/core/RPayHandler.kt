@@ -10,7 +10,6 @@ import android.os.Build
 import com.rpay.sdk.listener.RPayListener
 import com.rpay.sdk.utils.Session
 import com.rpay.sdk.view.activity.RPayHomeScreen
-import java.lang.Exception
 import java.util.*
 
 @SuppressLint("StaticFieldLeak")
@@ -113,6 +112,27 @@ internal class RPayHandler(
     }
 
     /**
+     * SetUp Login Status
+     */
+    fun setLoggedIn(status: Boolean) {
+        session.setLoggedIn(status)
+    }
+
+    /**
+     * Get Login Status
+     */
+    fun isLoggedIn(): Boolean {
+        return session.isLoggedIn()
+    }
+
+    /**
+     * Clear All Data
+     */
+    fun clearData() {
+        return session.clearData()
+    }
+
+    /**
      * SetUp payment listener
      */
     fun getPaymentListener(): RPayListener {
@@ -147,7 +167,8 @@ internal class RPayHandler(
      */
     fun isConnected(context: Context): Boolean {
         try {
-            val conMgr = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val conMgr =
+                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 val capabilities = conMgr.getNetworkCapabilities(
                     conMgr.activeNetwork
