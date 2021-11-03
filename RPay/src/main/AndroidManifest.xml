@@ -12,7 +12,6 @@
         tools:targetApi="n">
         <activity
             android:name=".view.activity.RPayHomeScreen"
-            android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:theme="@style/Theme.RPay"
             android:screenOrientation="portrait"/>
