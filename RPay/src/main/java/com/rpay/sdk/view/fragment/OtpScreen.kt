@@ -63,8 +63,7 @@ internal class OtpScreen : BaseFragment() {
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(p0: Context?, p1: Intent?) {
-            otp = p1?.getStringExtra("otp")!!
-            binding.pinView.value = otp
+            binding.pinView.value = p1?.getStringExtra("otp")!!
         }
     }
 

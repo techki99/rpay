@@ -263,7 +263,7 @@
         app:iconPadding="@dimen/space_8"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:textSize="@dimen/font_h7_size"/>
+        android:textSize="@dimen/font_title_size"/>
 
     <TextView
         android:layout_width="wrap_content"
