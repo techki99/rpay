@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.RPay" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryVariant">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/rPayColorPrimary</item>
+        <item name="colorPrimaryVariant">@color/rPayColorAccent</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/colorPrimary</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/rPayColorPrimary</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

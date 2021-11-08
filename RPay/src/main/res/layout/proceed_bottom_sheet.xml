@@ -38,7 +38,7 @@
         app:iconPadding="@dimen/space_10"
         app:iconTint="@color/white"
         android:layout_marginEnd="20dp"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/rPayColorPrimary"
         android:background="@drawable/bg_round_corner"
         android:text="@string/pay"
         android:textColor="@color/white"

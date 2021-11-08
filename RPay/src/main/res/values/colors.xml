@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#1A459A</color>
-    <color name="colorPrimaryDark">#003585</color>
-    <color name="colorAccent">#003585</color>
+    <color name="rPayColorPrimary">#1A459A</color>
+    <color name="rPayColorPrimaryDark">#003585</color>
+    <color name="rPayColorAccent">#003585</color>
 
 
     <color name="hint_color">#88FAFAFA</color>

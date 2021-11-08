@@ -107,6 +107,6 @@ internal class RPayHomeScreen : AppCompatActivity(), OTPReceiverListener {
     }
 
     override fun onOTPFailed(error: String) {
-        Toast.makeText(this, "Failed to detect OTP", Toast.LENGTH_SHORT).show()
+        RPayLog.message("Failed to detect OTP")
     }
 }
