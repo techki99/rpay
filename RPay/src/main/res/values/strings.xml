@@ -10,12 +10,13 @@
     <string name="OTPBanner">Sit back &amp; Relax! while we verify your \n account</string>
     <string name="OtpToast">( Enter the OTP below in case if we fail to detect the \n SMS automatically )</string>
     <string name="amountToBePaid">Amount to be paid</string>
-    <string name="totalAmountToBePaid"><b>Total amount to be paid : </b>Total Amount + Fee</string>
+    <string name="totalAmountToBePaid">Total amount to be paid</string>
     <string name="selectAnOption">SELECT AN OPTION TO PAY</string>
     <string name="payWithWallet">Pay with wallet</string>
     <string name="payWithCard">Pay with card</string>
     <string name="pay">Pay</string>
     <string name="orderAmount">Order Amount : </string>
+    <string name="orderAmount1">Order Amount</string>
     <string name="rPayFee">RPay Fee : </string>
     <string name="totalAmount">Total Amount : </string>
 </resources>
