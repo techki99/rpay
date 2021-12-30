@@ -21,30 +21,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="40dp"
-        android:visibility="gone"
+        android:layout_marginTop="50dp"
+        android:visibility="visible"
+        android:src="@drawable/app_logo_color"
         android:contentDescription="@string/imageContent"
         android:padding="@dimen/space_4"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/hintTextView"
-        app:layout_constraintTop_toBottomOf="@id/logoImageView"
-        android:text="Login to your wallet"
-        android:textColor="@color/white"
-        android:textAllCaps="true"
-        android:textSize="@dimen/font_h7_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/space_32"
-        android:textStyle="bold"/>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/contentLayout"
-        app:layout_constraintTop_toBottomOf="@id/hintTextView"
+        app:layout_constraintTop_toBottomOf="@id/logoImageView"
         android:layout_marginTop="@dimen/space_60"
         android:transitionName="content"
         android:layout_marginStart="@dimen/space_24"
@@ -64,7 +52,7 @@
                 android:text="Login to your wallet"
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_h7_size"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="@dimen/space_14"

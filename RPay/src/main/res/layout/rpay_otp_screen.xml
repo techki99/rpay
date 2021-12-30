@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="300dp"
         android:id="@+id/bgRound"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/bg_bottom_round"/>
@@ -20,24 +20,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginTop="40dp"
         android:contentDescription="@string/imageContent"
         android:padding="@dimen/space_4"
         android:src="@drawable/app_logo_color"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/hintTextView"
-        app:layout_constraintTop_toBottomOf="@id/logoImageView"
-        android:text="OTP Verification"
-        android:textColor="@color/white"
-        android:textSize="@dimen/font_h7_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/space_40"
-        android:textStyle="bold"/>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -62,7 +50,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="OTP Verification"
                 android:textColor="@color/black"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:textSize="@dimen/font_h7_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
