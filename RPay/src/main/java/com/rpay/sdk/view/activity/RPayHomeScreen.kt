@@ -62,7 +62,11 @@ internal class RPayHomeScreen : AppCompatActivity(), OTPReceiverListener {
     }
 
     override fun onBackPressed() {
-        showCloseDialog()
+        if (findNavController(R.id.rpay_navigation).currentDestination?.id == R.id.RPayPassCodeScreen) {
+            findNavController(R.id.rpay_navigation).popBackStack()
+        }else {
+            showCloseDialog()
+        }
     }
 
     private fun showCloseDialog() {

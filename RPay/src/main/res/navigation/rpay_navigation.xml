@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_rPayLoginScreen_to_rPayOtpScreen"
             app:destination="@id/rPayOtpScreen" />
+        <action
+            android:id="@+id/action_rPayLoginScreen_to_rPayPaymentScreen"
+            app:destination="@id/rPayPaymentScreen" />
     </fragment>
     <fragment
         android:id="@+id/rPayOtpScreen"
@@ -27,5 +30,15 @@
         android:id="@+id/rPayPaymentScreen"
         android:name="com.rpay.sdk.view.fragment.PaymentScreen"
         android:label="rpay_payment_screen"
-        tools:layout="@layout/rpay_payment_screen" />
+        tools:layout="@layout/rpay_payment_screen" >
+        <action
+            android:id="@+id/action_rPayPaymentScreen_to_RPayPassCodeScreen"
+            app:destination="@id/RPayPassCodeScreen"
+            app:popUpTo="@id/rPayPaymentScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/RPayPassCodeScreen"
+        android:name="com.rpay.sdk.view.fragment.RPayPassCodeScreen"
+        android:label="r_pay_pass_code_screen"
+        tools:layout="@layout/r_pay_pass_code_screen" />
 </navigation>

@@ -21,4 +21,7 @@ internal interface Api {
     @POST("sdk/api/customer/capture-transaction")
     suspend fun capturePayment(@HeaderMap headers: HashMap<String, String>, @Body params: HashMap<String, String>): Response<CaptureResponse>
 
+    @POST("sdk/api/customer/verify-passcode")
+    suspend fun verifyPasscode(@HeaderMap headers: Map<String, String>, @Body params: Map<String, String>): Response<OTPResponse>
+
 }

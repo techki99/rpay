@@ -11,8 +11,11 @@ import androidx.security.crypto.MasterKey
 
 internal object Session {
 
-    private lateinit var details: SharedPreferences
-    private lateinit var detailsEditor: SharedPreferences.Editor
+    private lateinit var userDetails: SharedPreferences
+    private lateinit var userDetailsEditor: SharedPreferences.Editor
+
+    private lateinit var appDetails: SharedPreferences
+    private lateinit var appDetailsEditor: SharedPreferences.Editor
 
     var session: Session? = null
 
@@ -27,67 +30,75 @@ internal object Session {
                 .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
                 .build()
 
-        details = EncryptedSharedPreferences.create(
+        userDetails = EncryptedSharedPreferences.create(
                 context,
-                "rpay",
+                "rpayUser",
                 masterKey,
                 EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
                 EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
 
-        detailsEditor = details.edit()
+        appDetails = EncryptedSharedPreferences.create(
+            context,
+            "rpayApp",
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
+
+        appDetailsEditor = appDetails.edit()
+        userDetailsEditor = userDetails.edit()
 
         return session as Session
     }
 
     fun setMerchantKey(key: String) {
-        detailsEditor.putString("merchantKey", key).commit()
+        appDetailsEditor.putString("merchantKey", key).commit()
     }
 
     fun getMerchantKey(): String {
-        return details.getString("merchantKey", "").toString()
+        return appDetails.getString("merchantKey", "").toString()
     }
 
     fun setAuthToken(key: String) {
-        detailsEditor.putString("AuthToken", key).commit()
+        userDetailsEditor.putString("AuthToken", key).commit()
     }
 
     fun getAuthToken(): String {
-        return details.getString("AuthToken", "").toString()
+        return userDetails.getString("AuthToken", "").toString()
     }
 
     fun setTotalAmount(key: String) {
-        detailsEditor.putString("amount", key).commit()
+        appDetailsEditor.putString("amount", key).commit()
     }
 
     fun getTotalAmount(): String {
-        return details.getString("amount", "").toString()
+        return appDetails.getString("amount", "").toString()
     }
 
     fun setCurrencyCode(key: String) {
-        detailsEditor.putString("currencyCode", key).commit()
+        appDetailsEditor.putString("currencyCode", key).commit()
     }
 
     fun getCurrencyCode(): String {
-        return details.getString("currencyCode", "").toString()
+        return appDetails.getString("currencyCode", "").toString()
     }
 
     fun setAppName(key: String) {
-        detailsEditor.putString("appName", key).commit()
+        appDetailsEditor.putString("appName", key).commit()
     }
 
     fun getAppName(): String {
-        return details.getString("appName", "").toString()
+        return appDetails.getString("appName", "").toString()
     }
 
     fun setLoggedIn(key: Boolean) {
-        detailsEditor.putBoolean("loggedIn", key).commit()
+        userDetailsEditor.putBoolean("loggedIn", key).commit()
     }
 
     fun isLoggedIn(): Boolean {
-        return details.getBoolean("loggedIn", false)
+        return userDetails.getBoolean("loggedIn", false)
     }
 
     fun clearData() {
-        detailsEditor.clear().commit()
+        userDetailsEditor.clear().commit()
     }
 }

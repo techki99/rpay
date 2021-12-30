@@ -8,6 +8,8 @@ import android.content.IntentFilter
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -76,59 +78,61 @@ internal class OtpScreen : BaseFragment() {
             pinView.setPinViewEventListener(object : Pinview.PinViewEventListener {
                 override fun onDataEntered(pin: Pinview?, fromUser: Boolean) {
                     if (pin != null) {
-                        if (otp.equals(pin.value, true)){
-                            if (context?.let { RPay.isNetConnected(it) } == false){
-                                showNoInternetDialog()
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            if (otp.equals(pin.value, true)){
+                                if (context?.let { RPay.isNetConnected(it) } == false){
+                                    showNoInternetDialog()
+                                }else {
+                                    val headers: HashMap<String, String> = HashMap()
+                                    headers["secret_key"] = RPay.getMerchantKey()
+                                    headers["auth_token"] = RPay.getAuthToken()
+                                    val params: HashMap<String, String> = HashMap()
+                                    params["otp"] = pin.value
+                                    pinView.clearValue()
+                                    pinView.clearFocus()
+                                    val iMm =
+                                        context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                                    iMm.hideSoftInputFromWindow(view?.windowToken, 0)
+                                    view?.clearFocus()
+                                    viewModel.getOTPStatus(params, headers)
+                                        .observe(viewLifecycleOwner, {
+                                            when (it) {
+                                                is NetworkResponse.Loading -> {
+                                                    /**
+                                                     * Show Progress Dialog
+                                                     */
+                                                    showProgressDialog()
+                                                }
+                                                is NetworkResponse.Success -> {
+                                                    /**
+                                                     * Handle Success Event
+                                                     */
+                                                    hideProgressDialog()
+                                                    if (it.data?.success.equals("1")) {
+                                                        showToast("OTP verified successfully")
+                                                        findNavController().navigate(R.id.action_rPayOtpScreen_to_rPayPaymentScreen)
+                                                    }
+                                                }
+                                                is NetworkResponse.ErrorResponse -> {
+                                                    /**
+                                                     * Handle Failure Event
+                                                     */
+                                                    hideProgressDialog()
+                                                    it.errorResponse?.message?.let { it1 ->
+                                                        showToast(
+                                                            it1
+                                                        )
+                                                    }
+                                                }
+                                            }
+                                        })
+                                }
                             }else {
-                                val headers: HashMap<String, String> = HashMap()
-                                headers["secret_key"] = RPay.getMerchantKey()
-                                headers["auth_token"] = RPay.getAuthToken()
-                                val params: HashMap<String, String> = HashMap()
-                                params["otp"] = pin.value
+                                showToast("Incorrect OTP")
                                 pinView.clearValue()
                                 pinView.clearFocus()
-                                val iMm =
-                                    context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-                                iMm.hideSoftInputFromWindow(view?.windowToken, 0)
-                                view?.clearFocus()
-                                viewModel.getOTPStatus(params, headers)
-                                    .observe(viewLifecycleOwner, {
-                                        when (it) {
-                                            is NetworkResponse.Loading -> {
-                                                /**
-                                                 * Show Progress Dialog
-                                                 */
-                                                showProgressDialog()
-                                            }
-                                            is NetworkResponse.Success -> {
-                                                /**
-                                                 * Handle Success Event
-                                                 */
-                                                hideProgressDialog()
-                                                if (it.data?.success.equals("1")) {
-                                                    showToast("OTP verified successfully")
-                                                    findNavController().navigate(R.id.action_rPayOtpScreen_to_rPayPaymentScreen)
-                                                }
-                                            }
-                                            is NetworkResponse.ErrorResponse -> {
-                                                /**
-                                                 * Handle Failure Event
-                                                 */
-                                                hideProgressDialog()
-                                                it.errorResponse?.message?.let { it1 ->
-                                                    showToast(
-                                                        it1
-                                                    )
-                                                }
-                                            }
-                                        }
-                                    })
                             }
-                        }else {
-                            showToast("Incorrect OTP")
-                            pinView.clearValue()
-                            pinView.clearFocus()
-                        }
+                        },400)
                     }
                 }
             })

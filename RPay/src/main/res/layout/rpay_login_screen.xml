@@ -22,32 +22,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="40dp"
+        android:visibility="gone"
         android:contentDescription="@string/imageContent"
-        android:padding="@dimen/space_4"
-        android:src="@drawable/app_logo_color"/>
+        android:padding="@dimen/space_4"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/hintTextView"
         app:layout_constraintTop_toBottomOf="@id/logoImageView"
-        android:text="Digital Payment Solution"
+        android:text="Login to your wallet"
         android:textColor="@color/white"
+        android:textAllCaps="true"
         android:textSize="@dimen/font_h7_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/space_10"
+        android:layout_marginTop="@dimen/space_32"
         android:textStyle="bold"/>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/contentLayout"
-        app:layout_constraintTop_toBottomOf="@id/logoImageView"
+        app:layout_constraintTop_toBottomOf="@id/hintTextView"
         android:layout_marginTop="@dimen/space_60"
         android:transitionName="content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="@dimen/space_60"
         android:layout_marginStart="@dimen/space_24"
         android:layout_marginEnd="@dimen/space_24"
         app:cardCornerRadius="@dimen/space_12">
@@ -65,6 +64,7 @@
                 android:text="Login to your wallet"
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_h7_size"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="@dimen/space_14"
@@ -77,7 +77,7 @@
                 android:layout_marginStart="@dimen/space_20"
                 android:visibility="visible"
                 android:layout_marginEnd="@dimen/space_20"
-                android:layout_marginTop="@dimen/space_20"
+                android:layout_marginTop="@dimen/space_32"
                 app:layout_constraintTop_toBottomOf="@id/titleTextView">
 
                 <TextView
@@ -237,7 +237,7 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/normal"
                     android:hint="@string/Password"
-                    android:imeOptions="actionNext"
+                    android:imeOptions="actionDone"
                     android:background="@drawable/bg_round_corner"
                     android:backgroundTint="@color/hint_color"
                     android:paddingStart="@dimen/space_20"
@@ -248,55 +248,11 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/passcode"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_body_size"
-                app:layout_constraintBottom_toTopOf="@id/passcodeLayout"
-                app:layout_constraintStart_toStartOf="@id/passcodeLayout"
-                android:layout_marginBottom="@dimen/space_8"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/passcodeLayout"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/space_56"
-                app:layout_constraintTop_toBottomOf="@id/passwordLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginStart="@dimen/space_20"
-                app:hintEnabled="false"
-                android:fontFamily="@font/normal"
-                android:layout_marginTop="@dimen/space_40"
-                android:layout_marginEnd="@dimen/space_20"
-                app:errorIconDrawable="@null"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleTint="#666666">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/passcodeEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/normal"
-                    android:hint="@string/passcode"
-                    android:background="@drawable/bg_round_corner"
-                    android:backgroundTint="@color/hint_color"
-                    android:paddingStart="@dimen/space_20"
-                    android:inputType="numberPassword"
-                    android:imeOptions="actionDone"
-                    android:maxLength="4"
-                    android:digits="0123456789"
-                    android:singleLine="true"
-                    android:textSize="13sp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/loginButton"
-                app:layout_constraintTop_toBottomOf="@id/passcodeLayout"
+                app:layout_constraintTop_toBottomOf="@id/passwordLayout"
                 android:background="@drawable/bg_round_corner"
                 android:layout_marginStart="@dimen/space_20"
                 android:layout_marginEnd="@dimen/space_20"

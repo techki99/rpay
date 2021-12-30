@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 
 internal object ApiClient {
 
-    var BASE_URL:String = "http://192.168.1.156/rpay/rpayusr/v1/"
+    var BASE_URL:String = "http://192.168.1.163/rpay/rpayusr/v1/"
 
     private val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor()
 

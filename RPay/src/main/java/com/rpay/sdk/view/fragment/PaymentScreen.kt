@@ -4,7 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.rpay.sdk.R
 import com.rpay.sdk.base.BaseFragment
 import com.rpay.sdk.core.RPay
 import com.rpay.sdk.core.RPayHandler
@@ -21,6 +25,9 @@ internal class PaymentScreen : BaseFragment() {
     private lateinit var viewModel: PaymentScreenViewModel
 
     private var walletStatus: String = "success"
+    private var amountToPay: String = ""
+    private var amountToPayCurrency: String = ""
+    private var merchantImage: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +69,7 @@ internal class PaymentScreen : BaseFragment() {
                         "success"
                     }
                     binding.amountTextView.text = RPay.getCurrencyCode() + " " + String.format(Locale.ENGLISH, "%.2f", RPay.getTotalAmount().toDouble())
-                    binding.walletBalanceTextView.text = it.data?.data?.api_user_currency + " " + it.data?.data?.api_user_balance
+                    binding.walletBalanceTextView.text = it.data?.data?.api_user_currency + " " + String.format(Locale.ENGLISH, "%.2f", it.data?.data?.api_user_balance?.toDouble())
                     binding.orderAmountTextView.text = it.data?.data?.deductable_currency + " " + it.data?.data?.deduct_amount
                     if (it.data?.data?.site_fee?.toDouble() != 0.0) {
                         binding.rPayFeeTextView.visibility = View.VISIBLE
@@ -72,6 +79,14 @@ internal class PaymentScreen : BaseFragment() {
                         binding.rPayFeeTextView.visibility = View.GONE
                         binding.rPayFeeTitleTextView.visibility = View.GONE
                     }
+                    if (it.data?.data?.merchant_profile_image?.isNotEmpty() == true) {
+                        merchantImage = it.data.data.merchant_profile_image
+                        Glide.with(this).load(it.data.data.merchant_profile_image).into(binding.merchantImageView)
+                    }else {
+                        //binding.merchantImageView.setImageDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.ic_app_logo))
+                    }
+                    amountToPay = it.data?.data?.deductable_amount.toString()
+                    amountToPayCurrency = it.data?.data?.deductable_currency.toString()
                     binding.totalAmountTextView.text = it.data?.data?.deductable_currency + " " + it.data?.data?.deductable_amount
                 }
                 is NetworkResponse.ErrorResponse -> {
@@ -113,42 +128,17 @@ internal class PaymentScreen : BaseFragment() {
                 if (context?.let { RPay.isNetConnected(it) } == false){
                     showNoInternetDialog()
                 }else {
-                    val headers: HashMap<String, String> = HashMap()
-                    headers["secret_key"] = RPay.getMerchantKey()
-                    headers["auth_token"] = RPay.getAuthToken()
-                    val params: HashMap<String, String> = HashMap()
-                    params["amount"] = RPay.getTotalAmount()
-                    params["currency"] = RPay.getCurrencyCode()
-                    params["description"] = ""
-                    viewModel.capturePayment(headers, params).observe(viewLifecycleOwner, {
-                        val listener = RPay.getListener()
-                        when (it) {
-                            is NetworkResponse.Loading -> {
-                                showProgressDialog()
-                            }
-                            is NetworkResponse.Success -> {
-                                hideProgressDialog()
-                                if (it.data?.data?.status.equals("success", true)){
-                                    it.data?.data?.TransactionId?.let { it1 ->
-                                        activity?.finishAndRemoveTask()
-                                        listener.onTransactionSuccess(it1)
-                                        RPay.clearData()
-                                    }
-                                }else {
-                                    activity?.finishAndRemoveTask()
-                                    listener.onTransactionFailure("Transaction failed")
-                                    RPay.clearData()
-                                }
-                            }
-                            is NetworkResponse.ErrorResponse -> {
-                                hideProgressDialog()
-                                activity?.finishAndRemoveTask()
-                                listener.onTransactionFailure("Transaction failed")
-                                RPay.clearData()
-                            }
-                        }
-                    })
+                    val bundle = Bundle()
+                    bundle.putString("amount", amountToPay)
+                    bundle.putString("currency", amountToPayCurrency)
+                    bundle.putString("merchantImage", merchantImage)
+                    findNavController().navigate(R.id.action_rPayPaymentScreen_to_RPayPassCodeScreen, bundle)
                 }
+            }
+
+            logoutTextView.setOnClickListener {
+                RPay.clearData()
+                findNavController().popBackStack(R.id.rPayLoginScreen, false)
             }
         }
     }

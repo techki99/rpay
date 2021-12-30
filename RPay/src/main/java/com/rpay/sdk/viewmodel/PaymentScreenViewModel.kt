@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rpay.sdk.extensions.getErrorResponse
 import com.rpay.sdk.model.CaptureResponse
+import com.rpay.sdk.model.LoginResponse
+import com.rpay.sdk.model.OTPResponse
 import com.rpay.sdk.model.PaymentDetailResponse
 import com.rpay.sdk.network.ApiClient
 import com.rpay.sdk.utils.NetworkResponse
@@ -15,6 +17,7 @@ internal class PaymentScreenViewModel: ViewModel() {
 
     private val paymentDetails: SingleLiveEvent<NetworkResponse<PaymentDetailResponse>> = SingleLiveEvent()
     private val capturePayment: SingleLiveEvent<NetworkResponse<CaptureResponse>> = SingleLiveEvent()
+    private val verifyPasscode: SingleLiveEvent<NetworkResponse<OTPResponse>> = SingleLiveEvent()
 
     fun getPaymentDetails(headers: HashMap<String, String>, params: HashMap<String, String>): LiveData<NetworkResponse<PaymentDetailResponse>> {
         viewModelScope.launch {
@@ -42,4 +45,16 @@ internal class PaymentScreenViewModel: ViewModel() {
         return capturePayment
     }
 
+    fun verifyPasscode(headers: Map<String, String>, params: Map<String, String>): LiveData<NetworkResponse<OTPResponse>> {
+        viewModelScope.launch {
+            verifyPasscode.postValue(NetworkResponse.Loading())
+            val response = ApiClient.getClient.verifyPasscode(headers, params)
+            if (response.isSuccessful) {
+                verifyPasscode.postValue(NetworkResponse.Success(response.body()!!))
+            }else {
+                verifyPasscode.postValue(NetworkResponse.ErrorResponse(getErrorResponse(response.errorBody()!!)))
+            }
+        }
+        return verifyPasscode
+    }
 }

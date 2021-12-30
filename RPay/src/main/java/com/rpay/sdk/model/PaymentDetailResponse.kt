@@ -26,6 +26,8 @@ internal data class PaymentDetailResponse(
         val site_fee: String,
         @SerializedName("api_user_currency")
         val api_user_currency: String,
+        @SerializedName("merchant_profile_image")
+        val merchant_profile_image: String,
         @SerializedName("api_user_balance")
         val api_user_balance: String
     )

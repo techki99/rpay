@@ -103,6 +103,10 @@ internal class LoginScreen : BaseFragment() {
     private fun setUpUi() {
         binding.apply {
 
+            if (RPay.isLoggedIn() == true){
+                findNavController().navigate(R.id.action_rPayLoginScreen_to_rPayPaymentScreen)
+            }
+
             ccpPicker.registerCarrierNumberEditText(numberEditText)
 
             ccpPicker.setPhoneNumberValidityChangeListener { isValidNumber ->
@@ -112,16 +116,12 @@ internal class LoginScreen : BaseFragment() {
             loginButton.setOnClickListener {
                 val phoneNumber = numberEditText.text.toString()
                 val password = passwordLayout.editText?.text.toString()
-                val passcode = passcodeLayout.editText?.text.toString()
                 when {
                     phoneNumber.isEmpty() -> {
                         showToast("Please enter a mobile number")
                     }
                     password.isEmpty() -> {
                         showToast("Please enter a password")
-                    }
-                    passcode.isEmpty() -> {
-                        showToast("Please enter a passcode")
                     }
                     context?.let { RPay.isNetConnected(it) } == false -> {
                         showNoInternetDialog()
@@ -130,7 +130,6 @@ internal class LoginScreen : BaseFragment() {
                         val params: HashMap<String, String> = HashMap()
                         params["phone_number"] = ccpPicker.fullNumber
                         params["password"] = password
-                        params["pass_code"] = passcode
                         viewModel.login(params, RPay.getMerchantKey()).observe(viewLifecycleOwner, {
                             when (it) {
                                 is NetworkResponse.Loading -> {
@@ -173,6 +172,16 @@ internal class LoginScreen : BaseFragment() {
                     }
                 }
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        try {
+            binding.passwordEditText.text = null
+            binding.phoneNumberEditText.text = null
+        }catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
